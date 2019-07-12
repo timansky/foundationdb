@@ -1,25 +1,28 @@
 version: 2
 jobs:
   build_main_deb:
-    branches:
-      only:
-        - circle-ci
     resource_class: x-large
     steps:
       - checkout
 
       - run:
-          name: make packages
-          command: docker-compose -f build/docker-compose.yaml run prb-packages
-
-      - run: 
           name: ls
           command: |
             ls -lah packages
-            ls -lah src/__this_is_some_very_long_name_dir_needed_to_fix_a_bug_with_debug_rpms__/foundationdb
+
+      - run:
+          name: make packages
+          command: docker-compose -f build/docker-compose.yaml run prb-packages
+
+      - run:
+          name: ls
+          command: |
+            ls -lah packages
 
 workflows:
   version: 2
   build:
     jobs:
-      - build_main_deb
+      - build_main_deb:
+          branches:
+            only: circle-ci
