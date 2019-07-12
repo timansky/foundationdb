@@ -1,6 +1,10 @@
 version: 2
 jobs:
   build_main_deb:
+    branches:
+      only:
+        - circle-ci
+    resource_class: x-large
     steps:
       - checkout
 
