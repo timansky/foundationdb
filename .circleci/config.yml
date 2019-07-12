@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build_main_deb:
+  make_packages:
     resource_class: x-large
     steps:
       - checkout
@@ -12,7 +12,7 @@ jobs:
 
       - run:
           name: make packages
-          command: docker-compose -f build/docker-compose.yaml run prb-packages
+          command: docker-compose -f build/docker-compose.yaml run -e MAKEJOBS=8 prb-packages
 
       - run:
           name: ls
@@ -21,8 +21,9 @@ jobs:
 
 workflows:
   version: 2
-  build:
+  packages:
     jobs:
-      - build_main_deb:
-          branches:
-            only: circle-ci
+      - make_packages:
+          filters:
+            branches:
+              only: circle-ci
