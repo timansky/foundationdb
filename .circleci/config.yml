@@ -10,6 +10,8 @@ jobs:
           name: ls
           command: |
             ls -lah
+            free -h
+            grep -c ^processor /proc/cpuinfo
 
       - run:
           name: make packages
