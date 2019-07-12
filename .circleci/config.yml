@@ -12,6 +12,8 @@ jobs:
           name: make packages
           command: docker-compose -f build/docker-compose.yaml run prb-packages
 
+      - run: 
+          name: ls
           command: |
             ls -lah packages
             ls -lah src/__this_is_some_very_long_name_dir_needed_to_fix_a_bug_with_debug_rpms__/foundationdb
