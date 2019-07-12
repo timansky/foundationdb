@@ -1,0 +1,19 @@
+version: 2
+jobs:
+  build_main_deb:
+    steps:
+      - checkout
+
+      - run:
+          name: make packages
+          command: docker-compose -f build/docker-compose.yaml run prb-packages
+
+          command: |
+            ls -lah packages
+            ls -lah src/__this_is_some_very_long_name_dir_needed_to_fix_a_bug_with_debug_rpms__/foundationdb
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build_main_deb
