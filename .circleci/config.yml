@@ -1,7 +1,8 @@
 version: 2
 jobs:
   make_packages:
-    resource_class: x-large
+    machine:
+      image: ubuntu-1604:201903-01
     steps:
       - checkout
 
@@ -12,7 +13,7 @@ jobs:
 
       - run:
           name: make packages
-          command: docker-compose -f build/docker-compose.yaml run -e MAKEJOBS=8 prb-packages
+          command: docker-compose -f build/docker-compose.yaml run prb-packages
 
       - run:
           name: ls
