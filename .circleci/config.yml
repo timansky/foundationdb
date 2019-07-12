@@ -9,7 +9,7 @@ jobs:
       - run:
           name: ls
           command: |
-            ls -lah packages
+            ls -lah
 
       - run:
           name: make packages
